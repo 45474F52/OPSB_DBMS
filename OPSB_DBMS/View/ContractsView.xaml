@@ -14,7 +14,7 @@
     </UserControl.DataContext>
 
     <Grid>
-        <ListView ItemsSource="{Binding Contracts}"
+        <ListView ItemsSource="{Binding FilteredContracts}"
                   Background="Transparent"
                   BorderThickness="0"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
