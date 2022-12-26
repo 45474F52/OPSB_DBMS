@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:OPSB_DBMS.View"
         xmlns:viewModel="clr-namespace:OPSB_DBMS.ViewModel"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModel:MainVM}"
         Title="{Binding CurrentView.Title}"
         Loaded="Window_Loaded"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
@@ -20,6 +19,10 @@
         MinHeight="500"
         Height="600"
         Width="920">
+
+    <Window.DataContext>
+        <viewModel:MainVM />
+    </Window.DataContext>
 
     <Grid Background="#212121">
 

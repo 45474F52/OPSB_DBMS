@@ -77,8 +77,15 @@
     <Compile Include="Model\DataBase\Commands\Update.cs" />
     <Compile Include="Model\DataBase\PartialContract.cs" />
     <Compile Include="Model\DataBase\PartialProduct.cs" />
+    <Compile Include="Model\Security\PasswordBindingMarshaller.cs" />
+    <Compile Include="Model\Security\PasswordBoxHelper.cs" />
+    <Compile Include="Model\Security\SecureStringExtentions.cs" />
+    <Compile Include="ViewModel\AuthorizationVM.cs" />
     <Compile Include="ViewModel\ClientsVM.cs" />
     <Compile Include="ViewModel\ContractsVM.cs" />
+    <Compile Include="View\AuthorizationView.xaml.cs">
+      <DependentUpon>AuthorizationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
     </Compile>
@@ -93,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\OtherViewsElements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AuthorizationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

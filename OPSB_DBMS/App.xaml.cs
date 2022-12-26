@@ -13,9 +13,9 @@ namespace OPSB_DBMS
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainView() { DataContext = new MainVM() };
+            MainWindow = new AuthorizationView() { DataContext = new AuthorizationVM() }; 
             MainWindow.Show();
-
+            
             base.OnStartup(e);
         }
 

@@ -50,7 +50,7 @@ namespace OPSB_DBMS.ViewModel
 
         public ContractsVM()
         {
-            Contracts = new ObservableCollection<Contract>(Select.GetContracts());
+            SetContracts();
 
             Contracts.CollectionChanged += OnCollectionChanged;
 
@@ -112,6 +112,8 @@ namespace OPSB_DBMS.ViewModel
             _addedIndexes = new List<int>();
             _removedIDs = new List<int>();
         }
+
+        private void SetContracts() => Contracts = new ObservableCollection<Contract>(Select.GetContracts());
 
         private bool ThereAreChanges() => _addedIndexes.Count > 0 || _removedIDs.Count > 0;
 

@@ -1,9 +1,12 @@
-﻿using OPSB_DBMS.Model.DataBase.Commands;
+﻿using OPSB_DBMS.Core;
+using OPSB_DBMS.Model.DataBase.Commands;
 
 namespace OPSB_DBMS.Model.DataBase
 {
-    public partial class Contract
+    public partial class Contract : ObservableObject
     {
+        public bool IsDirty { get; private set; }
+
         /// <summary>
         /// Создаёт документ (<see cref="Contract"/>), инициализируя поля <see cref="Customer"/> и <see cref="Product"/>
         /// </summary>
@@ -14,5 +17,40 @@ namespace OPSB_DBMS.Model.DataBase
             Customer = Select.GetClient(cID);
             Product = Select.GetProduct(pID);
         }
+
+        public string ObservableAgreement
+        {
+            get => Agreement;
+            set
+            {
+                Agreement = value;
+                IsDirty = true;
+                OnPropertyChanged();
+            }
+        }
+
+        public int ObservableCustomerID
+        {
+            get => CustomerID;
+            set
+            {
+                CustomerID = value;
+                IsDirty = true;
+                OnPropertyChanged();
+            }
+        }
+
+        public int ObservableProductID
+        {
+            get => ProductID;
+            set
+            {
+                ProductID = value;
+                IsDirty = true;
+                OnPropertyChanged();
+            }
+        }
+
+        public void ResetDirty() => IsDirty = false;
     }
 }

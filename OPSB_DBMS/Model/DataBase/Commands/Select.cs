@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OPSB_DBMS.Model.DataBase.Commands
 {
@@ -14,7 +15,7 @@ namespace OPSB_DBMS.Model.DataBase.Commands
         /// <returns>Возвращает <see cref="List{T}"/>, где T - <see cref="Product"/></returns>
         public static List<Product> GetProducts()
         {
-            var products = new List<Product>();
+            var products = new List<Product>(); 
 
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))
             {

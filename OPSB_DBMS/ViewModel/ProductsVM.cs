@@ -49,7 +49,7 @@ namespace OPSB_DBMS.ViewModel
 
         public ProductsVM()
         {
-            Products = new ObservableCollection<Product>(Select.GetProducts());
+            SetProducts();
 
             Products.CollectionChanged += OnCollectionChanged;
 
@@ -118,6 +118,8 @@ namespace OPSB_DBMS.ViewModel
             _addedIndexes = new List<int>();
             _removedIDs = new List<int>();
         }
+
+        private void SetProducts() => Products = new ObservableCollection<Product>(Select.GetProducts());
 
         private bool ThereAreChanges() =>
             _addedIndexes.Count > 0 || _removedIDs.Count > 0 || Products.Where(p => p.IsDirty).ToList().Count > 0;

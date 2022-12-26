@@ -13,16 +13,20 @@
                 <ResourceDictionary Source="/Resources/Styles/OtherViewsElements.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <DataTemplate DataType="{x:Type viewModel:MainVM}">
+                <view:MainView />
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:ProductsVM}">
-                <view:ProductsView/>
+                <view:ProductsView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:ClientsVM}">
-                <view:ClientsView/>
+                <view:ClientsView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:ContractsVM}">
-                <view:ContractsView/>
+                <view:ContractsView />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

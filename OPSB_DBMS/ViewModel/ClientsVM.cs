@@ -12,7 +12,9 @@ namespace OPSB_DBMS.ViewModel
 
         public ClientsVM()
         {
-            Clients = Select.GetClients();
+            SetClients();
         }
+
+        private void SetClients() => Clients = Select.GetClients();
     }
 }
