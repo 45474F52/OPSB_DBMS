@@ -45,11 +45,13 @@ namespace OPSB_DBMS.Model.Security
             {
                 secureString = new SecureString();
             }
-
-            fixed (char* ptr = password)
+            else
             {
-                char* value = ptr;
-                secureString = new SecureString(value, password.Length);
+                fixed (char* ptr = password)
+                {
+                    char* value = ptr;
+                    secureString = new SecureString(value, password.Length);
+                }
             }
         }
     }
