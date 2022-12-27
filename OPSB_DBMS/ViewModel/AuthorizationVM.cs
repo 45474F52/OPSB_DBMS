@@ -1,9 +1,11 @@
-﻿using OPSB_DBMS.Core;
+﻿using OPSB_DBMS.View;
+using OPSB_DBMS.Core;
 using OPSB_DBMS.Model.Security;
-using OPSB_DBMS.View;
-using System.Data.SqlClient;
-using System.Security;
+using OPSB_DBMS.Core.DialogService;
+using OPSB_DBMS.Model.DataBase.Commands;
 using System.Windows;
+using System.Security;
+using System.Data.SqlClient;
 
 namespace OPSB_DBMS.ViewModel
 {
@@ -42,22 +44,31 @@ namespace OPSB_DBMS.ViewModel
 
 		private void Authorization(object obj)
 		{
-			bool authValue;
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(App.ConnectionString)
+            {
+                UserID = _login ?? string.Empty,
+                Password = _password.ToUnsecuredString()
+            };
 
-			SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(App.ConnectionString);
+			App.SetConnectionString(builder.ConnectionString);
 
-            authValue = _login == builder.UserID && _password.ToUnsecuredString() == builder.Password;
-
-			if (authValue)
+            SqlException ex = Select.ConnectionCheck();
+			if (ex != null)
 			{
-				Window currentWindow = Application.Current.MainWindow;
-                Application.Current.MainWindow = new MainView() { DataContext = new MainVM() };
-				currentWindow.Close();
-				Application.Current.MainWindow.Show();
-			}
+				App.ModalDialogService.ShowDialog(
+					new ModalDialogView(),
+					new ModalDialogVM(ex.Message, "Неверные логин или пароль!\nПроверье правильность заполненных полей"),
+					DialogType.Error);
+            }
 			else
 			{
-				MessageBox.Show("Неверные логин или пароль!");
+				Password.Dispose();
+				_password.Dispose();
+
+				Window currentWindow = Application.Current.MainWindow;
+				Application.Current.MainWindow = new MainView() { DataContext = new MainVM() };
+				currentWindow.Close();
+				Application.Current.MainWindow.Show();
 			}
 		}
 	}

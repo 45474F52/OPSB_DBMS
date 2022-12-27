@@ -2,10 +2,11 @@
 using OPSB_DBMS.Model.DataBase;
 using OPSB_DBMS.Model.DataBase.Commands;
 using System.Linq;
-using System.Windows;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using OPSB_DBMS.View;
+using OPSB_DBMS.Core.DialogService;
 
 namespace OPSB_DBMS.ViewModel
 {
@@ -18,8 +19,10 @@ namespace OPSB_DBMS.ViewModel
 
         private ObservableCollection<Product> Products { get; set; }
         public ObservableCollection<Product> FilteredProducts => new ObservableCollection<Product>(
-            (from product in Products where product.ObservableName.ToLower().Contains(_filter?.ToLower() ?? "") ||
-             product.ObservableCategory.ToLower().Contains(_filter?.ToLower() ?? "") select product).ToList());
+            (from product in Products
+             where product.ObservableName.ToLower().Contains(_filter?.ToLower() ?? "") ||
+             product.ObservableCategory.ToLower().Contains(_filter?.ToLower() ?? "")
+             select product).ToList());
 
         private string _filter;
         public string Filter
@@ -107,10 +110,12 @@ namespace OPSB_DBMS.ViewModel
 
                 }
 
-                MessageBox.Show($"Удалено: {deleted}\nИзменено: {updated}\nДобавлено: {inserted}",
-                    "Сохранение изменений в базу данных прошло успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+                App.ModalDialogService.ShowDialog(
+                    new ModalDialogView(),
+                    new ModalDialogVM("Сохранение изменений в БД прошло успешно!", $"Удалено: {deleted}\nИзменено: {updated}\nДобавлено: {inserted}"),
+                    DialogType.Notify);
 
-                inserted = default; 
+                inserted = default;
                 deleted = default;
                 updated = default;
             });

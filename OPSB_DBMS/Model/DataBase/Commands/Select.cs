@@ -240,5 +240,31 @@ namespace OPSB_DBMS.Model.DataBase.Commands
 
             return contracts;
         }
+
+        /// <summary>
+        /// Проверяет подключение к БД
+        /// </summary>
+        /// <returns>Возвращает <see langword="null"/>, если удалось подключиться, в противном случае мето вернёт <see cref="SqlException"/></returns>
+        public static SqlException ConnectionCheck()
+        {
+            using (SqlConnection connection = new SqlConnection(App.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    _ = connection.ServerVersion;
+                }
+                catch (SqlException e)
+                {
+                    return e;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return null;
+        }
     }
 }
