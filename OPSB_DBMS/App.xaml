@@ -11,7 +11,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Styles/MainViewElements.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/OtherViewsElements.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/SettingsElements.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:SettingsVM}">
+                <view:SettingsView />
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:MainVM}">
                 <view:MainView />

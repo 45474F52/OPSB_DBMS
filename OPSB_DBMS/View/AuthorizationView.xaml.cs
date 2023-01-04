@@ -11,7 +11,6 @@ namespace OPSB_DBMS.View
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            //Application.Current.Shutdown();
             Close();
         }
 
@@ -22,7 +21,7 @@ namespace OPSB_DBMS.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            login.Focus();
         }
     }
 }

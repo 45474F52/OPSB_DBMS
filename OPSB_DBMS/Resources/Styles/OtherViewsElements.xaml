@@ -89,6 +89,9 @@
             <Trigger Property="IsFocused" Value="True">
                 <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="#4e4d59" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 

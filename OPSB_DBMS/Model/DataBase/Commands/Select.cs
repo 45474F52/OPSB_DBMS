@@ -1,6 +1,5 @@
 ﻿using System.Data.SqlClient;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace OPSB_DBMS.Model.DataBase.Commands
 {
@@ -12,10 +11,10 @@ namespace OPSB_DBMS.Model.DataBase.Commands
         /// <summary>
         /// Получает значения списка оборудования из БД
         /// </summary>
-        /// <returns>Возвращает <see cref="List{T}"/>, где T - <see cref="Product"/></returns>
+        /// <returns>Возвращает <see cref="List{T}"/>, где <see langword="T"/> — <see cref="Product"/></returns>
         public static List<Product> GetProducts()
         {
-            var products = new List<Product>(); 
+            List<Product> products = new List<Product>(); 
 
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))
             {
@@ -109,7 +108,7 @@ namespace OPSB_DBMS.Model.DataBase.Commands
         /// <summary>
         /// Получает значения списка клиентов из БД
         /// </summary>
-        /// <returns>Возвращает <see cref="List{T}"/>, где T - <see cref="Customer"/></returns>
+        /// <returns>Возвращает <see cref="List{T}"/>, где <see langword="T"/> — <see cref="Customer"/></returns>
         public static List<Customer> GetClients()
         {
             var clients = new List<Customer>();
@@ -200,7 +199,7 @@ namespace OPSB_DBMS.Model.DataBase.Commands
         /// <summary>
         /// Получает значения списка договоров из БД
         /// </summary>
-        /// <returns>Возвращает <see cref="List{T}"/>, где T - <see cref="Contract"/></returns>
+        /// <returns>Возвращает <see cref="List{T}"/>, где <see langword="T"/> — <see cref="Contract"/></returns>
         public static List<Contract> GetContracts()
         {
             var contracts = new List<Contract>();
@@ -244,7 +243,7 @@ namespace OPSB_DBMS.Model.DataBase.Commands
         /// <summary>
         /// Проверяет подключение к БД
         /// </summary>
-        /// <returns>Возвращает <see langword="null"/>, если удалось подключиться, в противном случае мето вернёт <see cref="SqlException"/></returns>
+        /// <returns>Возвращает <see langword="null"/>, если удалось подключиться, в противном случае метод вернёт <see cref="SqlException"/></returns>
         public static SqlException ConnectionCheck()
         {
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))

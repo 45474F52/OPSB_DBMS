@@ -2,9 +2,9 @@
 
 namespace OPSB_DBMS.View
 {
-    public partial class ContractsView : UserControl
+    public partial class SettingsView : UserControl
     {
-        public ContractsView()
+        public SettingsView()
         {
             InitializeComponent();
         }

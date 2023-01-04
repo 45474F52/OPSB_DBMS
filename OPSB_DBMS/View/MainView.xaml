@@ -57,7 +57,7 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="14"
-                       Margin="10 0 0 0"/>
+                       Margin="10 0 0 0" />
         </Grid>
         <!--Кнопки взаимодействия с окном-->
         <Grid Grid.Column="1"
@@ -80,7 +80,7 @@
                         Style="{StaticResource MVWrapButton}">
 
                     <Image Source="/Resources/Images/Buttons/Wrap.png"
-                           Margin="5"/>
+                           Margin="5" />
                 </Button>
 
                 <Button x:Name="UnwrapButton"
@@ -88,14 +88,14 @@
                         Style="{StaticResource MVWrapButton}">
 
                     <Image Source="/Resources/Images/Buttons/Unwrap.png"
-                           Margin="5"/>
+                           Margin="5" />
                 </Button>
 
                 <Button Click="CloseButton_Click"
                         Style="{StaticResource MVCloseButton}">
 
                     <Image Source="/Resources/Images/Buttons/Close.png"
-                           Margin="5"/>
+                           Margin="5" />
                 </Button>
 
             </StackPanel>
@@ -106,9 +106,9 @@
 
             <RadioButton Content="Оборудование"
                          DockPanel.Dock="Top"
-                         IsChecked="True"
                          Margin="0 50 0 0"
                          Style="{StaticResource MVRadioButton}"
+                         IsChecked="{Binding ProductsCheck, Mode=OneTime}"
                          Command="{Binding ToProducts}">
 
                 <RadioButton.Resources>
@@ -121,13 +121,14 @@
 
                 <RadioButton.ToolTip>
                     <TextBlock Foreground="White"
-                               Text="Оборудование"/>
+                               Text="Оборудование" />
                 </RadioButton.ToolTip>
             </RadioButton>
 
             <RadioButton Content="Клиенты"
                          DockPanel.Dock="Top"
                          Style="{StaticResource MVRadioButton}"
+                         IsChecked="{Binding ClientsCheck, Mode=OneTime}"
                          Command="{Binding ToClients}">
 
                 <RadioButton.Resources>
@@ -140,13 +141,14 @@
 
                 <RadioButton.ToolTip>
                     <TextBlock Foreground="White"
-                               Text="Клиенты"/>
+                               Text="Клиенты" />
                 </RadioButton.ToolTip>
             </RadioButton>
 
             <RadioButton Content="Договоры"
                          DockPanel.Dock="Top"
                          Style="{StaticResource MVRadioButton}"
+                         IsChecked="{Binding ContractsCheck, Mode=OneTime}"
                          Command="{Binding ToContracts}">
 
                 <RadioButton.Resources>
@@ -159,7 +161,27 @@
 
                 <RadioButton.ToolTip>
                     <TextBlock Foreground="White"
-                               Text="Договоры"/>
+                               Text="Договоры" />
+                </RadioButton.ToolTip>
+            </RadioButton>
+
+            <RadioButton Content="Настройки"
+                         DockPanel.Dock="Bottom"
+                         Style="{StaticResource MVRadioButton}"
+                         IsChecked="{Binding SettingsCheck, Mode=OneTime}"
+                         Command="{Binding ToSettings}">
+
+                <RadioButton.Resources>
+                    <Style TargetType="{x:Type ToolTip}"
+                           BasedOn="{StaticResource {x:Type ToolTip}}">
+
+                        <Setter Property="Background" Value="#1c1b1c" />
+                    </Style>
+                </RadioButton.Resources>
+
+                <RadioButton.ToolTip>
+                    <TextBlock Foreground="White"
+                               Text="Настройки" />
                 </RadioButton.ToolTip>
             </RadioButton>
         </DockPanel>
@@ -170,6 +192,7 @@
                 CornerRadius="20 0 0 0">
 
             <ContentControl Content="{Binding CurrentView}"
+                            Focusable="False"
                             Margin="30" />
         </Border>
     </Grid>

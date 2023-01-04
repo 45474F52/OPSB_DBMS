@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace OPSB_DBMS.Model.DataBase.Commands
 {
@@ -10,11 +11,32 @@ namespace OPSB_DBMS.Model.DataBase.Commands
     internal static class Insert
     {
         /// <summary>
+        /// Выбирает соответствующий метод вставки записей, исходя из типа объектов, которые нужно вставить
+        /// </summary>
+        /// <param name="handledDatas">Объекты, которые нужно вставить</param>
+        /// <returns>Возвращает количество вставленных объектов</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public static int InsertHandledData(in IEnumerable<ObservableType> handledDatas)
+        {
+            switch (handledDatas.First().nameOfData)
+            {
+                case NameOfData.Product:
+                    return InsertProducts(handledDatas.Cast<Product>());
+                case NameOfData.Customer:
+                    return InsertClients(handledDatas.Cast<Customer>());
+                case NameOfData.Contract:
+                    return InsertContracts(handledDatas.Cast<Contract>());
+                default:
+                    throw new System.NotImplementedException();
+            }
+        }
+
+        /// <summary>
         /// Вставляет в БД список оборудования
         /// </summary>
         /// <param name="products">Список оборудования</param>
-        /// <returns>Возвращает количество добавленных в БД значений</returns>
-        public static int InsertProducts(in List<Product> products)
+        /// <returns>Возвращает количество добавленных в БД объектов</returns>
+        public static int InsertProducts(in IEnumerable<Product> products)
         {
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))
             {
@@ -36,21 +58,20 @@ namespace OPSB_DBMS.Model.DataBase.Commands
                 {
                     connection.Open();
 
-                    for (int i = 0; i < products.Count; i++)
+                    foreach (Product product in products)
                     {
-                        command.Parameters["@Name"].Value = products[i].Name;
-                        command.Parameters["@Description"].Value = products[i].Description;
-                        command.Parameters["@Category"].Value = products[i].Category;
-                        command.Parameters["@Brand"].Value = products[i].Brand;
-                        command.Parameters["@Manufacturer"].Value = products[i].Manufacturer;
-                        command.Parameters["@Quantity"].Value = products[i].Quantity;
-                        command.Parameters["@Price"].Value = products[i].Price;
+                        command.Parameters["@Name"].Value = product.Name;
+                        command.Parameters["@Description"].Value = product.Description;
+                        command.Parameters["@Category"].Value = product.Category;
+                        command.Parameters["@Brand"].Value = product.Brand;
+                        command.Parameters["@Manufacturer"].Value = product.Manufacturer;
+                        command.Parameters["@Quantity"].Value = product.Quantity;
+                        command.Parameters["@Price"].Value = product.Price;
 
                         command.CommandText = "INSERT INTO [Product] VALUES (@Name, @Description, @Category, @Brand, @Manufacturer, @Quantity, @Price)";
 
                         command.ExecuteNonQuery();
                     }
-
                 }
                 finally
                 {
@@ -58,7 +79,87 @@ namespace OPSB_DBMS.Model.DataBase.Commands
                 }
             }
 
-            return products.Count;
+            return products.Count();
+        }
+
+        /// <summary>
+        /// Вставляет в БД список клиентов
+        /// </summary>
+        /// <param name="clients">Список клиентов</param>
+        /// <returns>Возвращает количество добавленных в БД объектов</returns>
+        internal static int InsertClients(IEnumerable<Customer> clients)
+        {
+            using (SqlConnection connection = new SqlConnection(App.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("", connection);
+
+                command.Parameters.Add("@FullName", SqlDbType.NVarChar, 256);
+                command.Parameters.Add("@Phone", SqlDbType.NVarChar, 11);
+                command.Parameters.Add("@Email", SqlDbType.NVarChar, 256);
+                command.Parameters.Add("@ReqServices", SqlDbType.NVarChar);
+
+                try
+                {
+                    connection.Open();
+
+                    foreach (Customer client in clients)
+                    {
+                        command.Parameters["@FullName"].Value = client.FullName;
+                        command.Parameters["@Phone"].Value = client.Phone;
+                        command.Parameters["@Email"].Value = client.Email;
+                        command.Parameters["@ReqServices"].Value = client.Required_services;
+
+                        command.CommandText = "INSERT INTO [Customer] VALUES (@FullName, @Phone, @Email, @ReqServices)";
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return clients.Count();
+        }
+
+        /// <summary>
+        /// Вставляет в БД список договоров
+        /// </summary>
+        /// <param name="contracts">Список договоров</param>
+        /// <returns>Возвращает количество добавленных в БД объектов</returns>
+        internal static int InsertContracts(IEnumerable<Contract> contracts)
+        {
+            using (SqlConnection connection = new SqlConnection(App.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("", connection);
+
+                command.Parameters.Add("@Agreement", SqlDbType.NVarChar);
+                command.Parameters.Add("@CustomerID", SqlDbType.Int);
+                command.Parameters.Add("@ProductID", SqlDbType.Int);
+
+                try
+                {
+                    connection.Open();
+
+                    foreach (Contract contract in contracts)
+                    {
+                        command.Parameters["@Agreement"].Value = contract.Agreement;
+                        command.Parameters["@CustomerID"].Value = contract.CustomerID;
+                        command.Parameters["@ProductID"].Value = contract.ProductID;
+
+                        command.CommandText = "INSERT INTO [Contract] VALUES (@Agreement, @CustomerID, @ProductID)";
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return contracts.Count();
         }
     }
 }

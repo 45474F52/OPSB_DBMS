@@ -57,7 +57,7 @@ namespace OPSB_DBMS.ViewModel
 			{
 				App.ModalDialogService.ShowDialog(
 					new ModalDialogView(),
-					new ModalDialogVM(ex.Message, "Неверные логин или пароль!\nПроверье правильность заполненных полей"),
+					new ModalDialogVM(ex.Message, "Неверные логин или пароль!\nПроверьте правильность заполненных полей"),
 					DialogType.Error);
             }
 			else
@@ -65,9 +65,9 @@ namespace OPSB_DBMS.ViewModel
 				Password.Dispose();
 				_password.Dispose();
 
-				Window currentWindow = Application.Current.MainWindow;
-				Application.Current.MainWindow = new MainView() { DataContext = new MainVM() };
-				currentWindow.Close();
+				Window authorizationWindow = Application.Current.MainWindow;
+				Application.Current.MainWindow = new MainView();
+				authorizationWindow.Close();
 				Application.Current.MainWindow.Show();
 			}
 		}

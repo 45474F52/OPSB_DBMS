@@ -1,17 +1,8 @@
-﻿using OPSB_DBMS.Core;
-
-namespace OPSB_DBMS.Model.DataBase
+﻿namespace OPSB_DBMS.Model.DataBase
 {
-    /// <summary>
-    /// Предоставляет свойства, оповещающие интерфейс об их изменении
-    /// </summary>
-    public partial class Product : ObservableObject
+    public partial class Product : ObservableType
     {
-        /// <summary>
-        /// Были ли свойства <see cref="Product"/> изменены
-        /// </summary>
-        /// <remarks><see langword="true"/>, если свойства были изменены, иначе <see langword="false"/></remarks>
-        public bool IsDirty { get; private set; }
+        public override int ObservableID => ID;
 
         public string ObservableName
 		{
@@ -89,10 +80,5 @@ namespace OPSB_DBMS.Model.DataBase
                 OnPropertyChanged();
             }
         }
-
-        /// <summary>
-        /// Сбрасывает значение <see cref="IsDirty"/>
-        /// </summary>
-        public void ResetDirty() => IsDirty = false;
     }
 }

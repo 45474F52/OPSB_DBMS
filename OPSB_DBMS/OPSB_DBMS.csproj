@@ -76,18 +76,28 @@
     <Compile Include="Core\DialogService\IModalDialogService.cs" />
     <Compile Include="Core\DialogService\IModalWindow.cs" />
     <Compile Include="Core\DialogService\ModalDialogService.cs" />
+    <Compile Include="Core\Settings\AppSettings.cs" />
+    <Compile Include="Core\Settings\SettingsAttribute.cs" />
+    <Compile Include="Core\Settings\SettingsItem.cs" />
+    <Compile Include="Model\Converters\EnumToArrayConverter.cs" />
+    <Compile Include="Model\Converters\IsEnumeratorConverter.cs" />
     <Compile Include="Model\DataBase\Commands\Delete.cs" />
     <Compile Include="Model\DataBase\Commands\Insert.cs" />
     <Compile Include="Model\DataBase\Commands\Update.cs" />
     <Compile Include="Model\DataBase\PartialContract.cs" />
+    <Compile Include="Model\DataBase\PartialCustomer.cs" />
     <Compile Include="Model\DataBase\PartialProduct.cs" />
+    <Compile Include="Model\DataHandler.cs" />
+    <Compile Include="Model\NameOfData.cs" />
+    <Compile Include="Model\ObservableType.cs" />
     <Compile Include="Model\Security\PasswordBindingMarshaller.cs" />
     <Compile Include="Model\Security\PasswordBoxHelper.cs" />
-    <Compile Include="Model\Security\SecureStringExtentions.cs" />
+    <Compile Include="Model\Security\SecureStringExtensions.cs" />
     <Compile Include="ViewModel\AuthorizationVM.cs" />
     <Compile Include="ViewModel\ClientsVM.cs" />
     <Compile Include="ViewModel\ContractsVM.cs" />
     <Compile Include="ViewModel\ModalDialogVM.cs" />
+    <Compile Include="ViewModel\SettingsVM.cs" />
     <Compile Include="View\AuthorizationView.xaml.cs">
       <DependentUpon>AuthorizationView.xaml</DependentUpon>
     </Compile>
@@ -103,11 +113,18 @@
     <Compile Include="View\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resources\Styles\MainViewElements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\OtherViewsElements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\SettingsElements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -175,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProductsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

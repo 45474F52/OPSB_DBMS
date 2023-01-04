@@ -90,16 +90,17 @@
             </Grid>
 
             <Grid Grid.Row="1"
-                  Margin="50">
+                  Margin="35">
                 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".5*"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height=".25*" />
                 </Grid.RowDefinitions>
 
                 <Label Target="{Binding ElementName=login}"
@@ -143,6 +144,15 @@
                                     Binding Password,
                                     UpdateSourceTrigger=PropertyChanged}" />
 
+                <TextBlock Grid.Row="2"
+                           Grid.ColumnSpan="2"
+                           Opacity=".7"
+                           Foreground="White" >
+                    
+                    <Run Text="*При потере логина/пароля обращаться к сис. админ–у БД" />
+                    <LineBreak />
+                    <Run Text="*ENTER для авторизации" />
+                </TextBlock>
             </Grid>
         </Grid>
     </Border>

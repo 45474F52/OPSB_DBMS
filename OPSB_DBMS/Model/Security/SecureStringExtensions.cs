@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace OPSB_DBMS.Model.Security
 {
-    internal static class SecureStringExtentions
+    internal static class SecureStringExtensions
     {
         /// <summary>
         /// Преобразует зашифрованную строку в обычную

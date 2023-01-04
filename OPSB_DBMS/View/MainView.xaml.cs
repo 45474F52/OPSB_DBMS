@@ -16,7 +16,6 @@ namespace OPSB_DBMS.View
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            //Application.Current.Shutdown();
             Close();
         }
 

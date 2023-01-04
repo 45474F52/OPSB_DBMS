@@ -69,7 +69,7 @@
                     Margin="0 0 20 0"
                     HorizontalAlignment="Right"
                     Style="{StaticResource InteractionButton2}"
-                    Command="{Binding SaveChanges}">
+                    Command="{Binding SaveCommand}">
 
                 <TextBlock Text="Сохранить изменения"
                            FontSize="16"
@@ -82,7 +82,7 @@
                   BorderThickness="0"
                   Background="Transparent"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ItemsSource="{Binding FilteredProducts}"
+                  ItemsSource="{Binding FilteredCollection}"
                   SelectedIndex="{Binding SelectedIndex}">
 
             <ListView.ItemContainerStyle>
